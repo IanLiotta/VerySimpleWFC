@@ -1,0 +1,37 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
+
+.ruleButton {
+  height: 20px;
+  width: 20px;
+  background: red;
+  border: 1px solid black;
+}
+
+.resultButton {
+  height: 20px;
+  width: 20px;
+  background: red;
+  border: 1px solid black;
+}
+
+.buttonRow{
+  display:flex;
+}
+
+.red {
+  background: rgba(255,0,0, 0.25);
+}
+
+.green {
+  background: rgba(0,255,0, 0.25);
+}
+
+.blue {
+  background: rgba(0,0,255, 0.25);
+}
