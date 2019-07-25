@@ -324,13 +324,13 @@ const ResultOutput = ({rules}) => {
   return(
     <div>
       <button
-      onClick={resetTable}
-      >Reset Pattern</button>
-      <button
       onClick={generatePattern}
       >Generate Pattern</button>
       <button
-        onClick={patternStep}
+      onClick={resetTable}
+      >Reset Pattern</button>
+      <button
+      onClick={patternStep}
       >Step Forward</button>
       <P5Wrapper sketch={resultCanvas} table={table} pinned={pinned} />
     </div>
@@ -349,7 +349,10 @@ const App = () => {
         <RuleInput size={4} rules={rules} setRules={setRules} />
         <ResultOutput rules={rules}/>
       </div>
-      <P5Wrapper sketch={ruleDisplay} rules={rules}/>
+      <div className="column-container">
+        <h2>Rule Display</h2>
+        <P5Wrapper sketch={ruleDisplay} rules={rules}/>
+      </div>
     </div>
   );
 }

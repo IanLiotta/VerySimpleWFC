@@ -67,9 +67,9 @@ export function ruleDisplay( res ){
   };
   
   res.myCustomRedrawAccordingToNewPropsHandler = ( props ) => {
-    let rows = rules.length / 4;
     rules = props.rules;
-    res.resizeCanvas(400, (drawnCount * 80)+80);
+    res.resizeCanvas(400, (rules.length * 65));
+    res.noLoop();
   }
   
   const drawRuleText = (row, col, rule) => {
@@ -127,7 +127,6 @@ export function ruleDisplay( res ){
   }
   
   const drawRule = (row, col, rule) => {
-    
     const offset = 40;
     switch(rule.dir){
       case 'u':
@@ -157,6 +156,12 @@ export function ruleDisplay( res ){
         break;
     }
     drawRuleText(row, col, rule);
+    
+  }
+  
+  res.mousePressed = ( ) => {
+    res.redraw( );
+    console.log(rules);
   }
   
   res.draw = ( ) => {
