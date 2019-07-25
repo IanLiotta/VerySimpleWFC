@@ -14,9 +14,24 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="root"></div>
+    <main class="main-container">
+      <h1>Wave Function Collapse</h1>
+      <h2>(Extra Simplified Version!)</h2>
+      <h3>
+        <a href="https://github.com/mxgmn/WaveFunctionCollapse">The original WFC implementation</a>
+      </h3>
+      <article class="column-container text-box">
+        <p>The Wave Function Collapse algorithm is designed to take an input bitmap and produce an output of arbitrary size that is locally similar to the input. It divides the bitmap into tiles, examines the relationships between their borders, and creates rules for which patterns can be adjacent. These rules may include symmetry and rotation.  </p>
+        <p>In this simplified demonstration, our bitmap is a small grid of solid colors. When a color is changed, the algorithm generates rules for which colors can be next to other colors, displayed on the right.</p>
+        <p>The output begins in a state where any cell could potentially be any of the input colors in the rule list. To start, the algorithm picks a random cell and sets it to a color. Once a cell is 'pinned' in this way, it constrains the possible colors its neighbors can be. The algorithm next picks one of the constrained neighbor cells and pins it, constraining its neighbors, and so on. In this simplified algorithm the chosen neighbor is random, but in a full implementation the algorithm picks the cell with the fewest possibilities.</p>
+        <p>The algorithm ends either when all cells are pinned, or when it reaches a contradiction. It is possible to implement backtracking to attempt to resolve contradictions, but this demo does not.</p>
+      </article>
+      <div id="root"></div>
+    </main>
+    
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

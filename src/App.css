@@ -18,6 +18,14 @@
   background: red;
   border: 1px solid black;
 }
+.main-container{
+  text-align:center;
+  background: #C583AE;
+  margin: .5rem 1rem .5rem 1rem;
+  padding: .5rem 3rem .3rem 3rem;
+  border-radius: 1rem;
+}
+
 
 .row-container{
   display:flex;
@@ -26,8 +34,21 @@
 }
 
 .column-container{
+  background: white;
+  border-radius: .5rem;
+  padding: .3rem;
+  margin: 1rem;
   display:flex;
   flex-direction:column;
+}
+
+.text-box{
+  font-size:1.2rem;
+  text-align:left;
+}
+
+.p5Canvas{
+  margin: 1rem;
 }
 
 .red {
