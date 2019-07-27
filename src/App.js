@@ -5,7 +5,6 @@ import './App.css';
 import RuleInput  from './RuleInput.js';
 import ResultOutput from './ResultOutput.js';
 
-// ******* The Main App ******
 const App = () => {
   
   const [rules, setRules] = useState([]);

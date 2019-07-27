@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 const config = require('./config.js');
 
-// ****** Buttons for the rule grid ******
 const RuleButton = ({row, col, updateRules}) => {
     const [colorIdx, setColorIdx] = useState(1);
     

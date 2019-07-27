@@ -9,7 +9,6 @@ export default function resultCanvas( res ) {
 
   res.myCustomRedrawAccordingToNewPropsHandler = (props) => {
     table = props.table || [];
-    pinned = props.pinned || [];
   }
   
   res.drawPossible = (row, col, xPx = 20, yPx = 20) => {
@@ -27,9 +26,6 @@ export default function resultCanvas( res ) {
         }
       res.fill(`rgba(${RGBA})`);
       res.rect(col*xPx, row*yPx, xPx, yPx);
-      if(pinned[row][col]){
-        res.rect(col*xPx+xPx/2, row*yPx+yPx/2, 2, 2,);
-      }
     }
     /* Draw with only solid colors.
     if(possible && possible.length === 1){
