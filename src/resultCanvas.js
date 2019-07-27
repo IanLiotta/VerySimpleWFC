@@ -2,7 +2,6 @@ const config = require('./config.js');
 
 export default function resultCanvas( res ) {
   let table = [];
-  let pinned = [];
   res.setup = () => {
     res.createCanvas(config.TABLE_SIZE*20, config.TABLE_SIZE*20);   
   }
@@ -34,12 +33,12 @@ export default function resultCanvas( res ) {
     }
     */
     else {
-      res.fill('magenta');
+      res.fill('gray');
       res.rect(col*xPx, row*yPx, xPx, yPx);
     }
   }
 
-  res.draw = (props) => {
+  res.draw = () => {
     for(let x = 0; x < table.length; x++){
       for(let y = 0; y < table[x].length; y++){
         res.drawPossible(x, y);
@@ -150,7 +149,6 @@ export function ruleDisplay( res ){
   
   res.mousePressed = ( ) => {
     res.redraw( );
-    console.log(rules);
   }
   
   res.draw = ( ) => {
