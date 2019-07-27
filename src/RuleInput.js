@@ -24,21 +24,21 @@ const RuleButton = ({row, col, updateRules}) => {
     
   }
 
-const RuleInput = ({size, rules, setRules}) => {
-    const [ruleSource, setRuleSource] = useState([]);
-  
-    const createTable = ( size ) => {
-      const newTable = [];
-      for(let x = 0; x < size; x++){
-        const cols = []
-        for(let y = 0; y < size; y++){
-          cols.push(1);
-        }
-        newTable.push(cols);
+  const createTable = ( size ) => {
+    const newTable = [];
+    for(let x = 0; x < size; x++){
+      const cols = []
+      for(let y = 0; y < size; y++){
+        cols.push(1);
       }
-      return newTable;
+      newTable.push(cols);
     }
-    
+    return newTable;
+  }
+
+const RuleInput = ({size, rules, setRules}) => {
+    const [ruleSource, setRuleSource] = useState(createTable(size));
+
       const ruleExists = (a, newRules) => {
       for(const b of newRules){
         if(a.source === b.source && a.dest === b.dest && a.dir === b.dir)
@@ -80,6 +80,7 @@ const RuleInput = ({size, rules, setRules}) => {
           }
         }
       }
+      console.log(JSON.stringify(newRules));
       setRules(newRules);
     }
     
@@ -101,7 +102,7 @@ const RuleInput = ({size, rules, setRules}) => {
     
     useEffect(() => {
       if(ruleSource.length === 0) {
-        setRuleSource(createTable(size));
+        generateRules();
       }
     });
     

@@ -8,7 +8,7 @@ const config = require('./config.js');
 
 const App = () => {
   const [table, setTable] = useState([]);
-  const [rules, setRules] = useState([]);
+  const [rules, setRules] = useState([{"source":1,"dest":1,"dir":"d"},{"source":1,"dest":1,"dir":"r"},{"source":1,"dest":1,"dir":"l"},{"source":1,"dest":1,"dir":"u"}]);
   const [loop, setLoop] = useState(false);
   //let debugRules = [{"source":3,"dest":1,"dir":"d"},{"source":3,"dest":3,"dir":"r"},{"source":3,"dest":3,"dir":"d"},{"source":3,"dest":3,"dir":"l"},{"source":1,"dest":3,"dir":"u"},{"source":1,"dest":1,"dir":"d"},{"source":1,"dest":3,"dir":"r"},{"source":3,"dest":3,"dir":"u"},{"source":3,"dest":1,"dir":"l"},{"source":3,"dest":1,"dir":"r"},{"source":1,"dest":2,"dir":"d"},{"source":1,"dest":3,"dir":"l"},{"source":1,"dest":1,"dir":"r"},{"source":1,"dest":1,"dir":"l"},{"source":1,"dest":1,"dir":"u"},{"source":1,"dest":2,"dir":"r"},{"source":2,"dest":1,"dir":"u"},{"source":2,"dest":2,"dir":"d"},{"source":2,"dest":1,"dir":"l"},{"source":2,"dest":1,"dir":"r"},{"source":1,"dest":2,"dir":"l"},{"source":2,"dest":2,"dir":"r"},{"source":2,"dest":2,"dir":"l"},{"source":2,"dest":2,"dir":"u"}];
   

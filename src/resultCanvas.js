@@ -51,7 +51,7 @@ export default function resultCanvas( res ) {
 export function ruleDisplay( res ){
   let rules = [];
   res.setup = () => {
-    res.createCanvas(400,80);
+    res.createCanvas(400,260);
   };
   
   res.myCustomRedrawAccordingToNewPropsHandler = ( props ) => {
