@@ -2,23 +2,14 @@ import React, { useState, useEffect } from 'react';
 import P5Wrapper from 'react-p5-wrapper';
 import resultCanvas, { ruleDisplay } from './resultCanvas.js';
 import './App.css';
-
-// ****** Constants ******
-const TABLE_SIZE = 20;
-
-const colors = [
-  'yellow',
-  'red', 
-  'green', 
-  'blue'
-];
+const config = require('./config.js');
 
 // ****** Buttons for the rule grid ******
 const RuleButton = ({row, col, updateRules}) => {
   const [colorIdx, setColorIdx] = useState(1);
   
   const cycleColor = () => {
-    if(colorIdx === colors.length - 1 ) {
+    if(colorIdx === config.colors.length - 1 ) {
       setColorIdx(1);
       updateRules(1, row, col);
     }
@@ -30,7 +21,7 @@ const RuleButton = ({row, col, updateRules}) => {
   
   return(
     <button
-      className={`ruleButton ${colors[colorIdx]}`}
+      className={`ruleButton ${config.colors[colorIdx]}`}
       onClick={cycleColor}
     ></button>
   )
@@ -186,12 +177,12 @@ const ResultOutput = ({rules}) => {
   
   const resetTable = () => {
     setLoop(false);
-    setTable(createTable(TABLE_SIZE));
+    setTable(createTable(config.TABLE_SIZE));
     
     let newPinned = [];
-      for(let x = 0; x < TABLE_SIZE; x++){
+      for(let x = 0; x < config.TABLE_SIZE; x++){
         let cols = []
-        for(let y = 0; y < TABLE_SIZE; y++){
+        for(let y = 0; y < config.TABLE_SIZE; y++){
           cols.push(false);
         }
         newPinned.push(cols);
@@ -207,12 +198,12 @@ const ResultOutput = ({rules}) => {
   
   const patternStep = () => {
     let tempTable = JSON.parse(JSON.stringify(table));
-    let possibleTable = createTable(TABLE_SIZE);
+    let possibleTable = createTable(config.TABLE_SIZE);
     let tempNextMoves = nextMoves;
     let newPinned = [];
-    for(let x = 0; x < TABLE_SIZE; x++){
+    for(let x = 0; x < config.TABLE_SIZE; x++){
       let cols = []
-      for(let y = 0; y < TABLE_SIZE; y++){
+      for(let y = 0; y < config.TABLE_SIZE; y++){
         cols.push(pinned[x][y]);
       }
       newPinned.push(cols);
@@ -223,8 +214,8 @@ const ResultOutput = ({rules}) => {
     
     const findNextMoves = () => {
       let tempNextMoves = [];
-      for(let x = 0; x < TABLE_SIZE; x++){
-        for(let y = 0; y < TABLE_SIZE; y++){
+      for(let x = 0; x < config.TABLE_SIZE; x++){
+        for(let y = 0; y < config.TABLE_SIZE; y++){
           if (newPinned[x][y] === true){
             if(table[x-1] && table[x-1][y] && !newPinned[x-1][y])
               tempNextMoves.push([x-1, y]);
@@ -241,8 +232,8 @@ const ResultOutput = ({rules}) => {
     }
 
     if(tempNextMoves.length === 0){
-      row = Math.floor(Math.random() * TABLE_SIZE);
-      col = Math.floor(Math.random() * TABLE_SIZE);
+      row = Math.floor(Math.random() * config.TABLE_SIZE);
+      col = Math.floor(Math.random() * config.TABLE_SIZE);
       possible = parseNeighbors(row, col, tempTable);
     }
     else {
@@ -267,8 +258,8 @@ const ResultOutput = ({rules}) => {
       let newPins = false;
       do{
         newPins = false;
-        for(let x = 0; x < TABLE_SIZE; x++){
-          for(let y = 0; y < TABLE_SIZE; y++){
+        for(let x = 0; x < config.TABLE_SIZE; x++){
+          for(let y = 0; y < config.TABLE_SIZE; y++){
             if(!newPinned[x][y]){
               possibleTable[x][y] = parseNeighbors(x, y, tempTable);
               if(possibleTable[x][y].length === 1){
@@ -301,11 +292,11 @@ const ResultOutput = ({rules}) => {
   
   useEffect(() => {
     if(table.length === 0){
-      setTable(createTable(TABLE_SIZE));
+      setTable(createTable(config.TABLE_SIZE));
       let newTable = [];
-      for(let x = 0; x < TABLE_SIZE; x++){
+      for(let x = 0; x < config.TABLE_SIZE; x++){
         let cols = []
-        for(let y = 0; y < TABLE_SIZE; y++){
+        for(let y = 0; y < config.TABLE_SIZE; y++){
           cols.push(false);
         }
         newTable.push(cols);

@@ -1,17 +1,10 @@
-const TABLE_SIZE = 20;
-
-const colorsRGBA = [
-  [128,128,128, 1],
-  [255,50,50, 0.25],
-  [50,255,50, 0.25],
-  [50,50,255, 0.25]
-];
+const config = require('./config.js');
 
 export default function resultCanvas( res ) {
   let table = [];
   let pinned = [];
   res.setup = () => {
-    res.createCanvas(TABLE_SIZE*20, TABLE_SIZE*20);   
+    res.createCanvas(config.TABLE_SIZE*20, config.TABLE_SIZE*20);   
   }
 
   res.myCustomRedrawAccordingToNewPropsHandler = (props) => {
@@ -27,10 +20,10 @@ export default function resultCanvas( res ) {
     if(possible && possible.length > 0){
       let RGBA = [0,0,0,0];
       for(const value of possible) {
-        RGBA[0] += colorsRGBA[value][0];
-        RGBA[1] += colorsRGBA[value][1];
-        RGBA[2] += colorsRGBA[value][2];
-        RGBA[3] += colorsRGBA[value][3];
+        RGBA[0] += config.colorsRGBA[value][0];
+        RGBA[1] += config.colorsRGBA[value][1];
+        RGBA[2] += config.colorsRGBA[value][2];
+        RGBA[3] += config.colorsRGBA[value][3];
         }
       res.fill(`rgba(${RGBA})`);
       res.rect(col*xPx, row*yPx, xPx, yPx);
@@ -40,7 +33,7 @@ export default function resultCanvas( res ) {
     }
     /* Draw with only solid colors.
     if(possible && possible.length === 1){
-      res.fill(colorsRGBA[possible[0]]);
+      res.fill(config.colorsRGBA[possible[0]]);
       res.rect(col*xPx, row*yPx, xPx, yPx);
     }
     */
@@ -130,27 +123,27 @@ export function ruleDisplay( res ){
     const offset = 40;
     switch(rule.dir){
       case 'u':
-        res.fill(`rgba(${colorsRGBA[rule.dest]})`);
+        res.fill(`rgba(${config.colorsRGBA[rule.dest]})`);
         res.rect((col*20)+(col*40), (row*20)+(row*40)+offset, 20, 20);
-        res.fill(`rgba(${colorsRGBA[rule.source]})`);
+        res.fill(`rgba(${config.colorsRGBA[rule.source]})`);
         res.rect((col*20)+(col*40), (row*20)+20+(row*40)+offset, 20, 20);        
         break;
       case 'l':
-        res.fill(`rgba(${colorsRGBA[rule.source]})`);
+        res.fill(`rgba(${config.colorsRGBA[rule.source]})`);
         res.rect((col*20)+20+(col*40), (row*20)+(row*40)+offset, 20, 20);
-        res.fill(`rgba(${colorsRGBA[rule.dest]})`);
+        res.fill(`rgba(${config.colorsRGBA[rule.dest]})`);
         res.rect((col*20)+(col*40), (row*20)+(row*40)+offset, 20, 20);
         break;
       case 'd':
-        res.fill(`rgba(${colorsRGBA[rule.source]})`);
+        res.fill(`rgba(${config.colorsRGBA[rule.source]})`);
         res.rect((col*20)+(col*40), (row*20)+(row*40)+offset, 20, 20);
-        res.fill(`rgba(${colorsRGBA[rule.dest]})`);
+        res.fill(`rgba(${config.colorsRGBA[rule.dest]})`);
         res.rect((col*20)+(col*40), (row*20)+20+(row*40)+offset, 20, 20);
         break;
       case 'r':
-        res.fill(`rgba(${colorsRGBA[rule.dest]})`);
+        res.fill(`rgba(${config.colorsRGBA[rule.dest]})`);
         res.rect((col*20)+20+(col*40), (row*20)+(row*40)+offset, 20, 20);
-        res.fill(`rgba(${colorsRGBA[rule.source]})`);
+        res.fill(`rgba(${config.colorsRGBA[rule.source]})`);
         res.rect((col*20)+(col*40), (row*20)+(row*40)+offset, 20, 20);
       default:
         break;
