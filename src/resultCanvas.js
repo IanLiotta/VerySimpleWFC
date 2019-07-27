@@ -8,8 +8,8 @@ export default function resultCanvas( res ) {
   }
 
   res.myCustomRedrawAccordingToNewPropsHandler = (props) => {
-    table = props.table;
-    pinned = props.pinned;
+    table = props.table || [];
+    pinned = props.pinned || [];
   }
   
   res.drawPossible = (row, col, xPx = 20, yPx = 20) => {
@@ -54,7 +54,6 @@ export default function resultCanvas( res ) {
 
 export function ruleDisplay( res ){
   let rules = [];
-  let drawnCount = 0;
   res.setup = () => {
     res.createCanvas(400,80);
   };
@@ -145,6 +144,7 @@ export function ruleDisplay( res ){
         res.rect((col*20)+20+(col*40), (row*20)+(row*40)+offset, 20, 20);
         res.fill(`rgba(${config.colorsRGBA[rule.source]})`);
         res.rect((col*20)+(col*40), (row*20)+(row*40)+offset, 20, 20);
+        break;
       default:
         break;
     }
@@ -160,7 +160,7 @@ export function ruleDisplay( res ){
   res.draw = ( ) => {
     res.background(255);
     let row = 0;
-    drawnCount = 0;
+    let drawnCount = 0;
     for(let i = 0; i < rules.length; i++){
       drawRule(row, 2, rules[i]);
       drawnCount++;
