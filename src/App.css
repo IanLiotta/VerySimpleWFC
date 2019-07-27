@@ -28,13 +28,13 @@
 }
 
 .red {
-  background: rgba(255,0,0, 0.25);
+  background: rgb(255,150,150);
 }
 
 .green {
-  background: rgba(0,255,0, 0.25);
+  background: rgb(150,255,150);
 }
 
 .blue {
-  background: rgba(0,0,255, 0.25);
+  background: rgb(150,150,255);
 }

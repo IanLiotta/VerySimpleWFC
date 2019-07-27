@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import P5Wrapper from 'react-p5-wrapper';
+import P5Wrapper, { __esModule } from 'react-p5-wrapper';
 import resultCanvas from './resultCanvas.js';
 const config = require('./config.js');
 
@@ -64,23 +64,30 @@ const ResultOutput = ({rules, table, setTable, loop, setLoop}) => {
       let row, col;
       let possible = [];
       
-      const findNextMoves = () => {
+      const findNextMoves = (x, y) => {
         let tempNextMoves = [];
+        let result = [];
         for(let x = 0; x < config.TABLE_SIZE; x++){
-          for(let y = 0; y < config.TABLE_SIZE; y++){
-            if (tempTable[x][y].includes(0)){
-              if(tempTable[x-1] && tempTable[x-1][y] && !tempTable[x-1][y].includes(0))
-                tempNextMoves.push([x-1, y]);
-              if(tempTable[x+1] && tempTable[x+1][y] && !tempTable[x+1][y].includes(0))
-                tempNextMoves.push([x+1, y]);
-              if(tempTable[x][y-1] && !tempTable[x][y-1].includes(0))
-                tempNextMoves.push([x, y-1]);
-              if(tempTable[x][y+1] && !tempTable[x][y+1].includes(0))
-                tempNextMoves.push([x, y+1]);
+            for(let y = 0; y < config.TABLE_SIZE; y++){
+                if (tempTable[x][y].includes(0)){
+                    if(tempTable[x-1] && tempTable[x-1][y] && !tempTable[x-1][y].includes(0))
+                    tempNextMoves.push([x-1, y]);
+                    if(tempTable[x+1] && tempTable[x+1][y] && !tempTable[x+1][y].includes(0))
+                    tempNextMoves.push([x+1, y]);
+                    if(tempTable[x][y-1] && !tempTable[x][y-1].includes(0))
+                    tempNextMoves.push([x, y-1]);
+                    if(tempTable[x][y+1] && !tempTable[x][y+1].includes(0))
+                    tempNextMoves.push([x, y+1]);
+                }
             }
-          }
         }
-        return tempNextMoves;
+        for(const move of tempNextMoves) {
+            const currentMoves = JSON.stringify(result);
+            if(!currentMoves.includes(JSON.stringify(move))){
+                result.push(move);
+            }
+        }
+        return result;
       }
       if(nextMoves.length === 0 && firstMove){
         row = Math.floor(Math.random() * config.TABLE_SIZE);
@@ -105,7 +112,6 @@ const ResultOutput = ({rules, table, setTable, loop, setLoop}) => {
             tempNextMoves = (tempNextMoves.length > 1) ?
                 tempNextMoves.slice(0, randIdx).concat(tempNextMoves.slice(randIdx+1))
                 : [];
-            console.log('tempNextMoves, chosenMove: ', JSON.stringify(tempNextMoves), chosenMove);
         }
       }
       
@@ -136,7 +142,7 @@ const ResultOutput = ({rules, table, setTable, loop, setLoop}) => {
         }while(newPins === true);
         }
       //done with step; set our state to the result.
-      setNextMoves(findNextMoves());
+      setNextMoves(findNextMoves(row, col));
       setTable(tempTable);
     }
 

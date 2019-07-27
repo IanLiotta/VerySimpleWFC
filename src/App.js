@@ -48,7 +48,7 @@ const App = () => {
       </div>
       <div className="column-container">
         <h2>Rule Display</h2>
-        {/*<P5Wrapper sketch={ruleDisplay} rules={rules}/>*/}
+        <P5Wrapper sketch={ruleDisplay} rules={rules}/>
       </div>
 
     </div>

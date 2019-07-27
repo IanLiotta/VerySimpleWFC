@@ -4,10 +4,13 @@ export default function resultCanvas( res ) {
   let table = [];
   res.setup = () => {
     res.createCanvas(config.TABLE_SIZE*20, config.TABLE_SIZE*20);   
+    res.noLoop();
+
   }
 
   res.myCustomRedrawAccordingToNewPropsHandler = (props) => {
     table = props.table || [];
+    res.redraw();
   }
   
   res.drawPossible = (row, col, xPx = 20, yPx = 20) => {
@@ -16,15 +19,12 @@ export default function resultCanvas( res ) {
       possible = [possible];
     }
     if(possible && possible.length > 0){
-      let RGBA = [0,0,0,0];
       for(const value of possible) {
-        RGBA[0] += config.colorsRGBA[value][0];
-        RGBA[1] += config.colorsRGBA[value][1];
-        RGBA[2] += config.colorsRGBA[value][2];
-        RGBA[3] += config.colorsRGBA[value][3];
+        if(value){
+          res.fill(`rgba(${config.colorsRGBA[value]})`);
+          res.rect(col*xPx, row*yPx, xPx, yPx);
         }
-      res.fill(`rgba(${RGBA})`);
-      res.rect(col*xPx, row*yPx, xPx, yPx);
+      }
     }
     /* Draw with only solid colors.
     if(possible && possible.length === 1){
@@ -36,6 +36,7 @@ export default function resultCanvas( res ) {
       res.fill('gray');
       res.rect(col*xPx, row*yPx, xPx, yPx);
     }
+    
   }
 
   res.draw = () => {
