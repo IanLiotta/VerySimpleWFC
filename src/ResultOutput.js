@@ -5,6 +5,7 @@ const config = require('./config.js');
 
 const ResultOutput = ({rules, table, setTable, loop, setLoop}) => {
     const [nextMoves, setNextMoves] = useState([]);
+    const [history, setHistory] = useState([]);
     const [firstMove, setFirstMove] = useState(true);
 
     const createTable = ( size ) => {
@@ -64,7 +65,7 @@ const ResultOutput = ({rules, table, setTable, loop, setLoop}) => {
       let row, col;
       let possible = [];
       
-      const findNextMoves = (x, y) => {
+      const findNextMoves = () => {
         let tempNextMoves = [];
         let result = [];
         for(let x = 0; x < config.TABLE_SIZE; x++){
@@ -103,6 +104,7 @@ const ResultOutput = ({rules, table, setTable, loop, setLoop}) => {
       else {
         let tempNextMoves = nextMoves;
         while(possible.length === 0 && tempNextMoves.length > 0){
+            let backSteps = 1;
             //pick a random valid move to pin next
             const randIdx = Math.floor(Math.random() * tempNextMoves.length);
             let chosenMove = tempNextMoves[randIdx];
@@ -142,7 +144,8 @@ const ResultOutput = ({rules, table, setTable, loop, setLoop}) => {
         }while(newPins === true);
         }
       //done with step; set our state to the result.
-      setNextMoves(findNextMoves(row, col));
+      setHistory(history.concat([tempTable]));
+      setNextMoves(findNextMoves());
       setTable(tempTable);
     }
 

@@ -80,7 +80,6 @@ const RuleInput = ({size, rules, setRules}) => {
           }
         }
       }
-      console.log(JSON.stringify(newRules));
       setRules(newRules);
     }
     
